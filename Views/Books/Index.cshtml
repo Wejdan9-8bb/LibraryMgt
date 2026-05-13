@@ -1,0 +1,60 @@
+﻿@model IEnumerable<LibraryMgt.Models.Book>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<div class="container mt-4">
+
+    <h1 class="text-center mb-4">Books Library 📚</h1>
+
+    <form asp-action="Index" method="get">
+    <input type="text" name="searchString" placeholder="Search book..." />
+    <button type="submit" class="btn btn-primary">Search</button>
+</form>
+
+    <div class="row">
+
+        @foreach (var item in Model)
+        {
+            <div class="col-md-4 mb-4">
+
+                <div class="card shadow">
+
+                    <img src="@item.CoverImage"
+                         class="card-img-top"
+                         height="350">
+
+                    <div class="card-body">
+
+                        <h5 class="card-title">
+                            @item.Title
+                        </h5>
+
+                        <p class="card-text">
+                            Genre: @item.Genre <br />
+                            Year: @item.YearPublished
+                        </p>
+
+                        <a asp-action="Edit"
+                           asp-route-id="@item.Id"
+                           class="btn btn-warning">
+                            Edit
+                        </a>
+
+                        <a asp-action="Delete"
+                           asp-route-id="@item.Id"
+                           class="btn btn-danger">
+                            Delete
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+        }
+
+    </div>
+
+</div>
